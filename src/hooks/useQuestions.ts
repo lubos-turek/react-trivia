@@ -10,7 +10,7 @@ const useQuestions = (amount: number) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       setError('')
-      const url = `https://opentdb.com/api.php?amount=${amount}&difficulty=hard&type=boolean`
+      const url = `https://opentdb.com/api.php?amount=${amount}&difficulty=hard&type=boolean&encode=base64`
       const response = await fetch(url)
       const { results, errors } = await response.json()
 
@@ -18,7 +18,7 @@ const useQuestions = (amount: number) => {
         setError(JSON.stringify(errors))
       } else if (results instanceof Array && results.length === amount) {
         const newQuestions = results.map((q: any) => (
-            { category: q.category, question: q.question, correctAnswer: q.correct_answer === 'True' }
+            { category: atob(q.category), question: atob(q.question), correctAnswer: q.correct_answer === 'True' }
           ))
         if(newQuestions.every(isQuestion)) {
           setQuestions(newQuestions)
