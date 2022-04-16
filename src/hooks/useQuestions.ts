@@ -18,7 +18,7 @@ const useQuestions = (amount: number) => {
         setError(JSON.stringify(errors))
       } else if (results instanceof Array && results.length === amount) {
         const newQuestions = results.map((q: any) => (
-            { category: atob(q.category), question: atob(q.question), correctAnswer: q.correct_answer === 'True' }
+            { category: window.atob(q.category), question: window.atob(q.question), correctAnswer: q.correct_answer === 'True' }
           ))
         if(newQuestions.every(isQuestion)) {
           setQuestions(newQuestions)
