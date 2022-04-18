@@ -17,8 +17,9 @@ const useQuestions = (amount: number) => {
       if(errors) {
         setError(errors?.map((e: {message: string}) => e.message).join('\n') ?? 'Unknown API error')
       } else if (results instanceof Array && results.length === amount) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const newQuestions = results.map((q: any) => (
-            { category: window.atob(q.category), question: window.atob(q.question), correctAnswer: q.correct_answer === 'True' }
+            { category: window.atob(q?.category), question: window.atob(q?.question), correctAnswer: q?.correct_answer === 'True' }
           ))
         if(newQuestions.every(isQuestion)) {
           setQuestions(newQuestions)

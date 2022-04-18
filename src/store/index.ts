@@ -1,11 +1,12 @@
 import { createStore } from 'redux'
-import Store from '../types/Store'
+import Question from '../types/Question'
+import Store, { Action } from '../types/Store'
 
 const initialState: Store = {
   latestQuizResults: undefined
 }
 
-const quizResultsReducer = (state: Store = initialState, action: any): Store => {
+const quizResultsReducer = (state: Store = initialState, action: Action<Question[]>): Store => {
   if (action.type === 'QUIZ_FINISHED') {
     return {...state,
         latestQuizResults: action?.payload

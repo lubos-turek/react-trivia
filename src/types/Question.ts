@@ -6,11 +6,12 @@ type Question = {
 }
 
 // Question Type Guard
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isQuestion = (question: any): question is Question =>
-  typeof question === 'object' && question !== null &&
-  typeof question.category === 'string' &&
-  typeof question.question === 'string' &&
-  typeof question.correctAnswer === 'boolean'
+  question instanceof Object && question !== null &&
+  typeof question?.category === 'string' &&
+  typeof question?.question === 'string' &&
+  typeof question?.correctAnswer === 'boolean'
 
 export default Question
 export { isQuestion }
