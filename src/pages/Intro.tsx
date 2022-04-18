@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Intro = () => {
   return (
@@ -8,7 +8,7 @@ const Intro = () => {
       <p>Can you score 100%?</p>
       <Link to="/quiz">BEGIN</Link>
     </>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;
