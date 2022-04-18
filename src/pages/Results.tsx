@@ -5,7 +5,6 @@ import Store from "../types/Store"
 
 const Results = () => {
   const latestResults = useSelector<Store, Question[] | undefined>(state => state.latestQuizResults)
-  console.log(latestResults)
 
   if(!latestResults) {
     return <p>Complete the <Link to="/quiz">quiz</Link> first to see your results</p>

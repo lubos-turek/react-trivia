@@ -6,13 +6,17 @@ import useQuestions from "../hooks/useQuestions"
 const QUESTIONS_AMOUNT = 10;
 
 const Quiz = () => {
-  const { questions, loading } = useQuestions(QUESTIONS_AMOUNT)
+  const { questions, loading, refetch, error } = useQuestions(QUESTIONS_AMOUNT)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   if (loading) {
     return <p>Loading</p>
+  }
+
+  if (error) {
+    return <><p>{error}</p><button onClick={refetch}>Refetch</button></>
   }
 
   const currentQuestion = questions[currentQuestionIndex]
