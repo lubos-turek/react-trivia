@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import useQuestions from "../hooks/useQuestions";
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import useQuestions from '../hooks/useQuestions'
 
-const QUESTIONS_AMOUNT = 10;
+const QUESTIONS_AMOUNT = 10
 
 const Quiz = () => {
-  const { questions, loading, refetch, error } = useQuestions(QUESTIONS_AMOUNT);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { questions, loading, refetch, error } = useQuestions(QUESTIONS_AMOUNT)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   if (loading) {
-    return <p>Loading</p>;
+    return <p>Loading</p>
   }
 
   if (error) {
@@ -21,19 +21,19 @@ const Quiz = () => {
         <p>{error}</p>
         <button onClick={refetch}>Refetch</button>
       </>
-    );
+    )
   }
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex]
   const handleAnswer = (answer: boolean) => {
-    currentQuestion.userAnswer = answer;
+    currentQuestion.userAnswer = answer
     if (currentQuestionIndex + 1 >= QUESTIONS_AMOUNT) {
-      navigate("/results");
-      dispatch({ type: "QUIZ_FINISHED", payload: questions });
+      navigate('/results')
+      dispatch({ type: 'QUIZ_FINISHED', payload: questions })
     } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
-  };
+  }
 
   return (
     <>
@@ -45,7 +45,7 @@ const Quiz = () => {
       <button onClick={() => handleAnswer(true)}>TRUE</button>
       <button onClick={() => handleAnswer(false)}>FALSE</button>
     </>
-  );
-};
+  )
+}
 
-export default Quiz;
+export default Quiz

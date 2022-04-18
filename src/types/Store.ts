@@ -1,12 +1,12 @@
-import Question from "./Question";
+import Question from './Question'
 
 type Store = {
-  latestQuizResults?: Question[];
-};
+  latestQuizResults?: Question[]
+}
 
 export type Action<Payload> = {
-  type: string;
-  payload: Payload;
-};
+  type: string
+  payload: Payload
+}
 
-export default Store;
+export default Store
