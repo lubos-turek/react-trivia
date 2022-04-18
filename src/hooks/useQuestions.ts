@@ -37,7 +37,7 @@ const useQuestions = (amount: number) => {
         setError('Server did not return right amount of questions')
       }
     } catch (error) {
-      setError('Error fetching the data: ' + error)
+      setError(`Error fetching the data: ${error}`)
     }
 
     setLoading(false)
