@@ -2,7 +2,7 @@ type Question = {
   category: string
   question: string
   correctAnswer: boolean
-  userAnsswer?: boolean
+  userAnswer?: boolean
 }
 
 // Question Type Guard

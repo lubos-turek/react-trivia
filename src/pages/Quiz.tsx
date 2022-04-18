@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
-import useQuestions from "../hooks/useQuestions";
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import useQuestions from "../hooks/useQuestions"
 
 const QUESTIONS_AMOUNT = 10;
 
 const Quiz = () => {
   const { questions, loading } = useQuestions(QUESTIONS_AMOUNT)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0)
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   if (loading) {
     return <p>Loading</p>
@@ -15,9 +17,10 @@ const Quiz = () => {
 
   const currentQuestion = questions[currentQuestionIndex]
   const handleAnswer = (answer: boolean) => {
-    currentQuestion.userAnsswer = answer
+    currentQuestion.userAnswer = answer
     if (currentQuestionIndex +1 >= QUESTIONS_AMOUNT) {
       navigate('/results')
+      dispatch({type: 'QUIZ_FINISHED', payload: questions})
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
