@@ -15,7 +15,7 @@ const useQuestions = (amount: number) => {
       const { results, errors } = await response.json()
 
       if (errors) {
-        setError(
+        throw new Error(
           errors?.map((e: { message: string }) => e.message).join('\n') ??
             'Unknown API error'
         )
@@ -29,12 +29,12 @@ const useQuestions = (amount: number) => {
         if (newQuestions.every(isQuestion)) {
           setQuestions(newQuestions)
         } else {
-          setError(
+          throw new Error(
             'One or more questions retrieved from the server has wrong format'
           )
         }
       } else {
-        setError('Server did not return right amount of questions')
+        throw new Error('Server did not return right amount of questions')
       }
     } catch (error) {
       setError(`Error fetching the data: ${error}`)
