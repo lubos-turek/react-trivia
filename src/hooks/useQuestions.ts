@@ -24,7 +24,7 @@ const useQuestions = (amount: number) => {
         const newQuestions = results.map((q: any) => ({
           category: window.atob(q?.category),
           question: window.atob(q?.question),
-          correctAnswer: q?.correct_answer === 'True',
+          correctAnswer: window.atob(q?.correct_answer) === 'True',
         }))
         if (newQuestions.every(isQuestion)) {
           setQuestions(newQuestions)

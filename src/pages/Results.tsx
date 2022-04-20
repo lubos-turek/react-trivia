@@ -1,7 +1,11 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import Question from '../types/Question'
 import Store from '../types/Store'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import AnswerResult from '../components/AnswerResult'
 
 const Results = () => {
   const latestResults = useSelector<Store, Question[] | undefined>(
@@ -23,18 +27,19 @@ const Results = () => {
 
   return (
     <>
-      <h1>
+      <Header>
         You Scored
         <br />
         {score} / {questionsAmount}
-      </h1>
+      </Header>
+
       {latestResults.map((question, i) => (
-        <p key={i}>
-          {question.userAnswer === question.correctAnswer ? '+' : '-'}{' '}
-          {question.question}
-        </p>
+        <AnswerResult question={question} key={i} />
       ))}
-      <Link to="/quiz">PLAY AGAIN?</Link>
+
+      <Footer>
+        <Link to="/quiz">PLAY AGAIN?</Link>
+      </Footer>
     </>
   )
 }

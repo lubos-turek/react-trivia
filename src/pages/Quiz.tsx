@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 import useQuestions from '../hooks/useQuestions'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Question from '../components/Question'
+import AnswerButton from '../components/AnswerButton'
 
 const QUESTIONS_AMOUNT = 10
 
@@ -17,10 +22,10 @@ const Quiz = () => {
 
   if (error) {
     return (
-      <>
-        <p>{error}</p>
+      <p>
+        {error}
         <button onClick={refetch}>Refetch</button>
-      </>
+      </p>
     )
   }
 
@@ -37,13 +42,16 @@ const Quiz = () => {
 
   return (
     <>
-      <h1>{currentQuestion.category}</h1>
-      <p>{currentQuestion.question}</p>
-      <p>
-        {currentQuestionIndex + 1} of {QUESTIONS_AMOUNT}
-      </p>
-      <button onClick={() => handleAnswer(true)}>TRUE</button>
-      <button onClick={() => handleAnswer(false)}>FALSE</button>
+      <Header>{currentQuestion.category}</Header>
+
+      <Question number={currentQuestionIndex + 1} total={QUESTIONS_AMOUNT}>
+        {currentQuestion.question}
+      </Question>
+
+      <Footer>
+        <AnswerButton onClick={() => handleAnswer(true)}>TRUE</AnswerButton>
+        <AnswerButton onClick={() => handleAnswer(false)}>FALSE</AnswerButton>
+      </Footer>
     </>
   )
 }
