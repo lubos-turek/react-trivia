@@ -19,23 +19,24 @@ const useQuestions = (amount: number) => {
           errors?.map((e: { message: string }) => e.message).join('\n') ??
             'Unknown API error'
         )
-      } else if (results instanceof Array && results.length === amount) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const newQuestions = results.map((q: any) => ({
-          category: window.atob(q?.category),
-          question: window.atob(q?.question),
-          correctAnswer: window.atob(q?.correct_answer) === 'True',
-        }))
-        if (newQuestions.every(isQuestion)) {
-          setQuestions(newQuestions)
-        } else {
-          throw new Error(
-            'One or more questions retrieved from the server has wrong format'
-          )
-        }
-      } else {
+      }
+
+      if (!(results instanceof Array) || results.length !== amount) {
         throw new Error('Server did not return right amount of questions')
       }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const newQuestions = results.map((q: any) => ({
+        category: window.atob(q?.category),
+        question: window.atob(q?.question),
+        correctAnswer: window.atob(q?.correct_answer) === 'True',
+      }))
+
+      if (!newQuestions.every(isQuestion)) {
+        throw new Error('Wrong data format')
+      }
+      
+      setQuestions(newQuestions)
     } catch (error) {
       setError(`Error fetching the data: ${error}`)
     }
