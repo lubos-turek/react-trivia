@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# Trivia React Excercise 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). To run the code you need to have node and npm installed. Then
 
-## Available Scripts
+```
+npm i
+npm start
+```
 
-In the project directory, you can run:
+You can also:
 
-### `npm start`
+`npm test` to run tests.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm run lint` to run ESLint.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`npm run prettify` to use prettier on the codebase.
 
-### `npm test`
+### Explaining the design decisions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* I tried to get the job done with as little code as possible while keeping it readable.
 
-### `npm run build`
+* I didn't make any assumptions about the data returned from the API so I check its format and the amount of questions retrieved and display. Also, an error is diplayed if anything goes wrong with the request (e.g. you're offline). There is a refetch button if anything goes wrong with the API call.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* I am not a big fan of putting all the state to the redux store (eg `QUESTIONS_LOADING`) because this way the store structure grows too fast in a big application. I personally prefer to keep all the local state in the component so that's the approach I use here. I use redux only to pass the results between the Quiz page and the Results page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* I also considered alternatives to Redux for passing the data between the Quiz page and the Results page. I was tempted to just lift the state up but decided not to because it's an approach that gets messy if the application grows. Other option was to put this state into react context, but I decided not to do for the same reason, among other.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Minor comments
 
-### `npm run eject`
+* I know I use index as a key in component list in Results page. It is now cosidiered okay if the order of items does not change ( https://reactjs.org/docs/lists-and-keys.html#keys ) I would definitely not do it if the order could change.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* I allow the type `any` for type guard and when handling api responses. I dont make any assumptions about the data retrieved from the api, so I type it as `any` and then process it into a typed format.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* The strings returned from the API had its special characters escaped in a very strange way. I researched the API and it worked fine if I ask for strings being in `base64`. I decode those strings with the `atob` funcion. This function was marked as deprecated but as [this github issue](https://github.com/microsoft/TypeScript/issues/45566) says: `atob` is deprecated in node, not in the browser. So I use `window.atob` instead of just `atob` so that the linter knows it's a browser `atob` and not the one from Node.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* If the project grew I would probably change the structure of the project a little bit. Now I put all the components into a shared `src/components` folder even if they are used by one page only. Fortunately, changing the folder structure is something very easy to do so I would not worry about it too much until the project gets bigger.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Can't wait to hear from you what you think 😉 Have a good read.
