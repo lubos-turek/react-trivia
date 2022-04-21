@@ -12,13 +12,10 @@ const useQuestions = (amount: number) => {
 
     try {
       const response = await fetch(url)
-      const { results, errors } = await response.json()
+      const { results, error } = await response.json()
 
-      if (errors) {
-        throw new Error(
-          errors?.map((e: { message: string }) => e.message).join('\n') ??
-            'Unknown API error'
-        )
+      if (error) {
+        throw new Error(error)
       }
 
       if (!(results instanceof Array) || results.length !== amount) {
@@ -35,7 +32,7 @@ const useQuestions = (amount: number) => {
       if (!newQuestions.every(isQuestion)) {
         throw new Error('Wrong data format')
       }
-      
+
       setQuestions(newQuestions)
     } catch (error) {
       setError(`Error fetching the data: ${error}`)
