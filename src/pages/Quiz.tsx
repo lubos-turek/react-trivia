@@ -33,8 +33,8 @@ const Quiz = () => {
   const handleAnswer = (answer: boolean) => {
     currentQuestion.userAnswer = answer
     if (currentQuestionIndex + 1 >= QUESTIONS_AMOUNT) {
-      navigate('/results')
       dispatch({ type: 'QUIZ_FINISHED', payload: questions })
+      navigate('/results')
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
