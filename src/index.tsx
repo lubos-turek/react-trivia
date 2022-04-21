@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import './index.css'
-import reportWebVitals from './reportWebVitals'
 import Intro from './pages/Intro'
 import Quiz from './pages/Quiz'
 import Results from './pages/Results'
@@ -22,5 +21,3 @@ root.render(
     </BrowserRouter>
   </Provider>
 )
-
-reportWebVitals()
