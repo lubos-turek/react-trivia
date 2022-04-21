@@ -24,9 +24,9 @@ const useQuestions = (amount: number) => {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newQuestions = results.map((q: any) => ({
-        category: window.atob(q?.category),
-        question: window.atob(q?.question),
-        correctAnswer: window.atob(q?.correct_answer) === 'True',
+        category: window.atob(q?.category || ''),
+        question: window.atob(q?.question || ''),
+        correctAnswer: window.atob(q?.correct_answer || '') === 'True',
       }))
 
       if (!newQuestions.every(isQuestion)) {
