@@ -9,7 +9,6 @@ const Wrapper = styled.div`
 `
 
 const IconContainer = styled.div`
-  display: flex;
   flex: 1 0 auto;
   align-items: center;
   font-size: 1.25em;
