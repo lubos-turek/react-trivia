@@ -51,8 +51,8 @@ describe('Quiz Page', () => {
 
   it('calls refetch function from useQuestions if refetch button is clicked', () => {
     // As strange as it sounds, the semicolon below is needed ¯\_(ツ)_/¯
-    const mockedRefetch = jest.fn();
-    (useQuestions as jest.Mock).mockReturnValueOnce({
+    const mockedRefetch = jest.fn()
+    ;(useQuestions as jest.Mock).mockReturnValueOnce({
       loading: false,
       error: 'Sample Error',
       refetch: mockedRefetch,
@@ -130,8 +130,8 @@ describe('Quiz Page', () => {
       loading: false,
       questions: sampleUseQuestionData,
     })
-    const mockedDispatch = jest.fn();
-    (useDispatch as jest.Mock).mockReturnValue(mockedDispatch)
+    const mockedDispatch = jest.fn()
+    ;(useDispatch as jest.Mock).mockReturnValue(mockedDispatch)
 
     renderWithRedux(<Quiz />, {})
     for (let i = 0; i < 10; i++) {

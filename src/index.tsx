@@ -8,7 +8,7 @@ import Quiz from './pages/Quiz'
 import Results from './pages/Results'
 import store from './store'
 
-const container = (document.getElementById('root') as HTMLElement)
+const container = document.getElementById('root') as HTMLElement
 render(
   <Provider store={store}>
     <BrowserRouter>
@@ -18,5 +18,6 @@ render(
         <Route path="/results" element={<Results />} />
       </Routes>
     </BrowserRouter>
-  </Provider>
-, container)
+  </Provider>,
+  container
+)
