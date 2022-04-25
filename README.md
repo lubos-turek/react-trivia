@@ -35,6 +35,4 @@ You can also:
 
 * If the project grew I would probably change the structure of the project a little bit. Now I put all the components into a shared `src/components` folder even if they are used by one page only. Fortunately, changing the folder structure is something very easy to do so I would not worry about it too much until the project gets bigger.
 
-* I also wanted to write tests for [useQuestions](https://github.com/lubos-turek/react-trivia/blob/master/src/hooks/useQuestions.ts) but [react-hooks-testing-library](https://github.com/testing-library/react-hooks-testing-library) does not support React 18 yet. If it's a big deal let me know and I will either downgrade React to 17 or write tests for hooks the old way: manually mount them on artificially created components.
-
 Can't wait to hear from you what you think 😉 Have a good read.

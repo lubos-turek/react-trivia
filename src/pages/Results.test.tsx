@@ -1,12 +1,10 @@
-import { cleanup, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 
 import Results from './Results'
 import renderWithRedux from '../test/renderWithRedux'
 import sampleStoreDate from '../test/sampleStoreData'
 
 describe('Results Page', () => {
-  afterEach(cleanup)
-
   it('displays link to Quiz page if there are not results in store', () => {
     renderWithRedux(<Results />, {})
     const linkElement = screen.getByText('quiz', { exact: false })
