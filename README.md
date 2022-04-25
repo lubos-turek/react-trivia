@@ -1,6 +1,6 @@
 # Trivia React Excercise 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). To run the code you need to have node and npm installed. Then
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). To run the code you need to have node >= 16 and npm >= 7 installed. Then
 
 ```
 npm i
