@@ -11,8 +11,8 @@ jest.mock('../hooks/useQuestions', () => jest.fn())
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn()
-}));
+  useDispatch: jest.fn(),
+}))
 
 describe('Quiz Page', () => {
   it('displays "Loading" when questions request is loading', () => {
@@ -134,12 +134,15 @@ describe('Quiz Page', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatchMock)
 
     renderWithRedux(<Quiz />, {})
-    for(let i=0; i<10; i++) {
+    for (let i = 0; i < 10; i++) {
       const trueButton = screen.getByText('True', { exact: false })
       userEvent.click(trueButton)
     }
 
-    const expectedAction = { type: 'QUIZ_FINISHED', payload: sampleUseQuestionData.map(q => ({...q, userAnswer: true}))}
+    const expectedAction = {
+      type: 'QUIZ_FINISHED',
+      payload: sampleUseQuestionData.map((q) => ({ ...q, userAnswer: true })),
+    }
     expect(dispatchMock).toHaveBeenCalledWith(expectedAction)
   })
 })
