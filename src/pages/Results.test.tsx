@@ -1,48 +1,8 @@
-import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { cleanup, screen } from '@testing-library/react'
 
 import Results from './Results'
-import Store from '../types/Store'
-
-const renderWithRedux = (component: React.ReactNode, initialState: Store) => {
-  const store = createStore((state) => ({ ...state }), initialState)
-  return {
-    ...render(
-      <BrowserRouter>
-        <Provider store={store}>{component}</Provider>
-      </BrowserRouter>
-    ),
-    store,
-  }
-}
-
-const sampleStoreDate: Store = {
-  latestQuizResults: [
-    {
-      category: 'Entertainment: Video Games',
-      question: 'Unturned originally started as a Roblox game.',
-      correctAnswer: true,
-      userAnswer: false,
-    },
-    {
-      category: 'Entertainment: Video Games',
-      question:
-        'In the game "Melty Blood Actress Again Current Code", you can enter Blood Heat mode in Half Moon style.',
-      correctAnswer: false,
-      userAnswer: false,
-    },
-    {
-      category: 'Science & Nature',
-      question:
-        'It was once believed that injecting shark cartilage into people would prevent them from contracting cancer.',
-      correctAnswer: true,
-      userAnswer: true,
-    },
-  ],
-}
+import renderWithRedux from '../test/renderWithRedux'
+import sampleStoreDate from '../test/sampleStoreData'
 
 describe('Results Page', () => {
   afterEach(cleanup)
@@ -56,7 +16,7 @@ describe('Results Page', () => {
   it('does not display results if there are none', () => {
     renderWithRedux(<Results />, {})
     const headerElement = screen.queryByText('You Scored', { exact: false })
-    expect(headerElement).not.toBeInTheDocument()
+    expect(headerElement).toBeNull()
   })
 
   it('displays latest results from store', () => {
@@ -106,7 +66,7 @@ describe('Results Page', () => {
     expect(parentElement?.firstChild?.textContent).toBe('+')
   })
 
-  it('displays - next to correctly answered falsy question', () => {
+  it('displays - next to incorrectly answered question', () => {
     renderWithRedux(<Results />, sampleStoreDate)
 
     const questionElement = screen.getByText('Unturned originally started as', {

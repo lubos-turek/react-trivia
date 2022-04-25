@@ -49,7 +49,7 @@ const useQuestions = (amount: number) => {
   useEffect(() => {
     refetch()
   }, [refetch])
-
+  console.log(questions)
   return { questions, loading, refetch, error }
 }
 

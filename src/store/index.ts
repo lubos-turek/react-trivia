@@ -8,7 +8,7 @@ const initialState: Store = {
 
 const quizResultsReducer = (
   state: Store = initialState,
-  action: Action<Question[]>
+  action: Action<Question[] | undefined>
 ): Store => {
   if (action.type === 'QUIZ_FINISHED') {
     return { ...state, latestQuizResults: action?.payload }
