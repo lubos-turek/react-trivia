@@ -51,18 +51,18 @@ describe('Quiz Page', () => {
 
   it('calls refetch function from useQuestions if refetch button is clicked', () => {
     // As strange as it sounds, the semicolon below is needed ¯\_(ツ)_/¯
-    const a = jest.fn();
+    const mockedRefetch = jest.fn();
     (useQuestions as jest.Mock).mockReturnValueOnce({
       loading: false,
       error: 'Sample Error',
-      refetch: a,
+      refetch: mockedRefetch,
     })
 
     renderWithRedux(<Quiz />, {})
     const refetchButton = screen.getByText('Refetch')
     userEvent.click(refetchButton)
 
-    expect(a).toHaveBeenCalled()
+    expect(mockedRefetch).toHaveBeenCalled()
   })
 
   it('displays question category', () => {
@@ -130,8 +130,8 @@ describe('Quiz Page', () => {
       loading: false,
       questions: sampleUseQuestionData,
     })
-    const dispatchMock = jest.fn();
-    (useDispatch as jest.Mock).mockReturnValue(dispatchMock)
+    const mockedDispatch = jest.fn();
+    (useDispatch as jest.Mock).mockReturnValue(mockedDispatch)
 
     renderWithRedux(<Quiz />, {})
     for (let i = 0; i < 10; i++) {
@@ -143,6 +143,6 @@ describe('Quiz Page', () => {
       type: 'QUIZ_FINISHED',
       payload: sampleUseQuestionData.map((q) => ({ ...q, userAnswer: true })),
     }
-    expect(dispatchMock).toHaveBeenCalledWith(expectedAction)
+    expect(mockedDispatch).toHaveBeenCalledWith(expectedAction)
   })
 })
