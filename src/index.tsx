@@ -1,5 +1,4 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
@@ -9,8 +8,8 @@ import Quiz from './pages/Quiz'
 import Results from './pages/Results'
 import store from './store'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
+const container = (document.getElementById('root') as HTMLElement)
+render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
@@ -20,4 +19,4 @@ root.render(
       </Routes>
     </BrowserRouter>
   </Provider>
-)
+, container)
